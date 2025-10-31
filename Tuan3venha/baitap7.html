@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bố cục wrapper / header / nav / main / footer</title>
+<style>
+  /* reset cơ bản */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f3f3f3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+  }
+
+  /* wrapper chính (viền ngoài như hình) */
+  #wrapper {
+    width: 640px;          /* chỉnh kích thước theo ý */
+    height: 640px;         /* chỉnh nếu muốn cao hơn/ thấp hơn */
+    background: #fff;
+    border: 6px solid #222;   /* viền dày tương tự hình */
+    padding: 12px;            /* khoảng cách viền trong */
+    box-shadow: 18px 18px 24px rgba(0,0,0,0.25);
+    display: grid;
+    grid-template-rows: 90px 1fr 70px; /* header / content / footer */
+    grid-template-columns: 150px 1fr;  /* nav / main */
+    grid-template-areas:
+      "header header"
+      "nav    main"
+      "footer footer";
+    gap: 12px;
+  }
+
+  header {
+    grid-area: header;
+    border: 3px solid #222;
+    display:flex;
+    align-items:center;
+    padding-left:12px;
+    font-weight:600;
+    font-size:18px;
+  }
+
+  nav {
+    grid-area: nav;
+    border: 3px solid #222;
+    padding: 12px;
+    font-weight:600;
+    /* để nav cao bằng main nội dung */
+    overflow:auto;
+  }
+
+  main {
+    grid-area: main;
+    border: 3px solid #222;
+    padding: 12px;
+    min-height: 0; /* cho overflow trong grid hoạt động tốt */
+    overflow:auto;
+  }
+
+  footer {
+    grid-area: footer;
+    border: 3px solid #222;
+    display:flex;
+    align-items:center;
+    padding-left:12px;
+    font-weight:600;
+  }
+
+  /* Một vài kiểu nhỏ để text trông giống box nhãn như hình */
+  header::before { content: "header"; color:#333; }
+  nav::before    { content: "nav";    color:#333; }
+  main::before   { content: "main";   color:#333; font-weight:700; }
+  footer::before { content: "footer"; color:#333; }
+
+  /* responsive: thu nhỏ wrapper trên màn nhỏ */
+  @media (max-width:700px) {
+    #wrapper {
+      width: 100%;
+      height: auto;
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "header"
+        "nav"
+        "main"
+        "footer";
+    }
+  }
+</style>
+</head>
+<body>
+
+<div id="wrapper">
+  <header></header>
+  <nav></nav>
+  <main></main>
+  <footer></footer>
+</div>
+
+</body>
+</html>
